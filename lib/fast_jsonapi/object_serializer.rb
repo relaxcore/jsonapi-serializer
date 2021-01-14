@@ -288,7 +288,8 @@ module FastJsonapi
           transform_method: @transform_method,
           meta: options[:meta],
           links: options[:links],
-          lazy_load_data: options[:lazy_load_data]
+          lazy_load_data: options[:lazy_load_data],
+          presenter: options[:presenter]
         )
       end
 

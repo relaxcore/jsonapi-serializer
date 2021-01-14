@@ -1,6 +1,6 @@
 module FastJsonapi
   class Relationship
-    attr_reader :owner, :key, :name, :id_method_name, :record_type, :object_method_name, :object_block, :serializer, :relationship_type, :cached, :polymorphic, :conditional_proc, :transform_method, :links, :meta, :lazy_load_data
+    attr_reader :owner, :key, :name, :id_method_name, :record_type, :object_method_name, :object_block, :serializer, :relationship_type, :cached, :polymorphic, :conditional_proc, :transform_method, :links, :meta, :lazy_load_data, :presenter
 
     def initialize(
       owner:,
@@ -18,7 +18,8 @@ module FastJsonapi
       transform_method:,
       links:,
       meta:,
-      lazy_load_data: false
+      lazy_load_data: false,
+      presenter:
     )
       @owner = owner
       @key = key
@@ -36,6 +37,7 @@ module FastJsonapi
       @links = links || {}
       @meta = meta || {}
       @lazy_load_data = lazy_load_data
+      @presenter = presenter
       @record_types_for = {}
       @serializers_for_name = {}
     end

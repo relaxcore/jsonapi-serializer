@@ -175,8 +175,11 @@ module FastJsonapi
           included_objects = Array(relationship_item.fetch_associated_object(record, params))
           next if included_objects.empty?
 
-          static_serializer = relationship_item.static_serializer
+          static_serializer  = relationship_item.static_serializer
           static_record_type = relationship_item.static_record_type
+
+          presenter = relationship_item.presenter || static_serializer.name.gsub('Serializer', 'Presenter').constantize rescue nil
+          included_objects.map! { |obj| presenter.new(obj, params) } if presenter
 
           included_objects.each do |inc_obj|
             serializer = static_serializer || relationship_item.serializer_for(inc_obj, params)
